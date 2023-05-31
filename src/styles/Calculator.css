@@ -1,8 +1,24 @@
-.button {
-    width: 70px;
-    height: 50px;
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
 }
 
-.double {
-    width: 120px;
+.screen {
+  height: 50px;
+  color: whitesmoke;
+  background-color: darkgray;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.button {
+  width: 100px;
+  height: 70px;
+}
+
+.button.zero {
+  width: 200px;
 }

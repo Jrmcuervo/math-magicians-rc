@@ -41,11 +41,10 @@ const Calculator = () => (
 const Button = ({ label, color, doubleSize }) => {
   const buttonStyle = {
     backgroundColor: color === 'orange' ? '#FF8C00' : '#E0E0E0',
-    gridColumn: doubleSize ? 'span 2' : 'span 1',
   };
 
   return (
-    <button className="button" style={buttonStyle} type="button">
+    <button className={`button ${doubleSize ? 'zero' : ''}`} style={buttonStyle} type="button">
       {label}
     </button>
   );
