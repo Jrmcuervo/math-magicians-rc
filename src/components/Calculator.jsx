@@ -1,63 +1,61 @@
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import '../styles/Calculator.css';
+import calculate from '../logic/calculate';
+import Button from './Button';
 
-const Calculator = () => (
-  <div className="calculator">
-    <div className="screen">0</div>
-    <div className="buttons">
-      <div className="row">
-        <Button label="AC" color="light-gray" />
-        <Button label="+/-" color="light-gray" />
-        <Button label="%" color="light-gray" />
-        <Button label="÷" color="orange" />
-      </div>
-      <div className="row">
-        <Button label="7" color="gray" />
-        <Button label="8" color="gray" />
-        <Button label="9" color="gray" />
-        <Button label="×" color="orange" />
-      </div>
-      <div className="row">
-        <Button label="4" color="gray" />
-        <Button label="5" color="gray" />
-        <Button label="6" color="gray" />
-        <Button label="-" color="orange" />
-      </div>
-      <div className="row">
-        <Button label="1" color="gray" />
-        <Button label="2" color="gray" />
-        <Button label="3" color="gray" />
-        <Button label="+" color="orange" />
-      </div>
-      <div className="row">
-        <Button label="0" color="gray" doubleSize />
-        <Button label="." color="gray" />
-        <Button label="=" color="orange" />
-      </div>
-    </div>
-  </div>
-);
+const Calculator = () => {
+  const [displayValue, setDisplayValue] = useState('0');
+  const [calculatorData, setCalculatorData] = useState({
+    total: null,
+    next: null,
+    operation: null,
+  });
 
-const Button = ({ label, color, doubleSize }) => {
-  const buttonStyle = {
-    backgroundColor: color === 'orange' ? '#FF8C00' : '#E0E0E0',
+  const handleButtonClick = (buttonName) => {
+    const newData = calculate(calculatorData, buttonName);
+    setCalculatorData(newData);
+
+    const { total, next } = newData;
+    const valueToDisplay = next || total || '0';
+    setDisplayValue(valueToDisplay);
   };
 
   return (
-    <button className={`button ${doubleSize ? 'zero' : ''}`} style={buttonStyle} type="button">
-      {label}
-    </button>
+    <div className="calculator">
+      <div className="screen">{displayValue}</div>
+      <div className="buttons">
+        <div className="row">
+          <Button label="AC" color="light-gray" onClick={handleButtonClick} />
+          <Button label="+/-" color="light-gray" onClick={handleButtonClick} />
+          <Button label="%" color="light-gray" onClick={handleButtonClick} />
+          <Button label="÷" color="orange" onClick={handleButtonClick} />
+        </div>
+        <div className="row">
+          <Button label="7" color="gray" onClick={handleButtonClick} />
+          <Button label="8" color="gray" onClick={handleButtonClick} />
+          <Button label="9" color="gray" onClick={handleButtonClick} />
+          <Button label="x" color="orange" onClick={handleButtonClick} />
+        </div>
+        <div className="row">
+          <Button label="4" color="gray" onClick={handleButtonClick} />
+          <Button label="5" color="gray" onClick={handleButtonClick} />
+          <Button label="6" color="gray" onClick={handleButtonClick} />
+          <Button label="-" color="orange" onClick={handleButtonClick} />
+        </div>
+        <div className="row">
+          <Button label="1" color="gray" onClick={handleButtonClick} />
+          <Button label="2" color="gray" onClick={handleButtonClick} />
+          <Button label="3" color="gray" onClick={handleButtonClick} />
+          <Button label="+" color="orange" onClick={handleButtonClick} />
+        </div>
+        <div className="row">
+          <Button label="0" color="gray" doubleSize onClick={handleButtonClick} />
+          <Button label="." color="gray" onClick={handleButtonClick} />
+          <Button label="=" color="orange" onClick={handleButtonClick} />
+        </div>
+      </div>
+    </div>
   );
-};
-
-Button.propTypes = {
-  label: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  doubleSize: PropTypes.bool,
-};
-
-Button.defaultProps = {
-  doubleSize: false,
 };
 
 export default Calculator;
