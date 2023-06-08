@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/quoteContainer.css';
 
 const QuoteComponent = () => {
   const [quote, setQuote] = useState('');
@@ -16,7 +17,7 @@ const QuoteComponent = () => {
         const response = await axios.get(
           'https://api.api-ninjas.com/v1/quotes?category=happiness',
           {
-            headers: { 'X-Api-Key': 'imG1fTLCj3XPgR1bBOdEkw==LU6iTLXt2WSYAqvB' }, // Replace with your API key
+            headers: { 'X-Api-Key': 'imG1fTLCj3XPgR1bBOdEkw==LU6iTLXt2WSYAqvB' },
           },
         );
 
@@ -42,7 +43,7 @@ const QuoteComponent = () => {
   }
 
   return (
-    <div>
+    <div className="quoteContainer">
       <h2>Quote of the day:</h2>
       <p>
         &ldquo;
